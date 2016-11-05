@@ -73,6 +73,8 @@ pub mod execute;
 
 // #[cfg(feature = "logging")]
 pub mod logging;
+
+// #[cfg(feature = "visualization")]
 pub mod vizlogging;
 
 /// A composite trait for types usable in timely dataflow.

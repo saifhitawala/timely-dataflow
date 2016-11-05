@@ -42,7 +42,6 @@ impl<T: Timestamp> ChildWrapper<T> {
         path.push(index);
 
         ::logging::log(&::logging::OPERATES, ::logging::OperatesEvent { addr: path.clone(), name: scope.name().to_owned() });
-        ::vizlogging::log_operator_info(::logging::OperatesEvent { addr: path.clone(), name: scope.name().to_owned() }));
 
         let local = scope.local();
         let inputs = scope.inputs();
@@ -119,7 +118,6 @@ impl<T: Timestamp> ChildWrapper<T> {
         let active = {
 
             ::logging::log(&::logging::SCHEDULE, ::logging::ScheduleEvent { addr: self.addr.clone(), is_start: true });
-            ::vizlogging::log_schedule_info(::logging::ScheduleEvent { addr: self.addr.clone(), is_start: true });
 
             let result = if let &mut Some(ref mut scope) = &mut self.scope {
                 scope.pull_internal_progress(&mut self.internal_progress,
@@ -129,7 +127,6 @@ impl<T: Timestamp> ChildWrapper<T> {
             else { false };
 
             ::logging::log(&::logging::SCHEDULE, ::logging::ScheduleEvent { addr: self.addr.clone(), is_start: false });
-            ::vizlogging::log_schedule_info(::logging::ScheduleEvent { addr: self.addr.clone(), is_start: false });
 
             result
         };

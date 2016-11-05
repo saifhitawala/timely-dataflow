@@ -19,6 +19,7 @@ path="./communication"
 [features]
 default=[]
 logging=[]
+visualization=[]
 
 [dependencies]
 abomonation="0.4.4"

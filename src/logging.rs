@@ -8,9 +8,6 @@ use std::fs::File;
 
 use ::Data;
 
-use std::fmt;
-use std::fmt::Debug;
-
 use timely_communication::Allocate;
 use ::progress::timestamp::RootTimestamp;
 use ::progress::nested::product::Product;
@@ -18,10 +15,6 @@ use ::progress::nested::product::Product;
 use dataflow::scopes::root::Root;
 use dataflow::Scope;
 use dataflow::operators::capture::{EventWriter, Event, EventPusher};
-
-use progress::count_map::CountMap;
-use progress::nested::subgraph::{Source, Target};
-use progress::{Timestamp, Operate, Antichain};
 
 use abomonation::Abomonation;
 
@@ -54,34 +47,28 @@ pub trait Logger {
 }
 
 /// Logs events to an underlying writer.
-pub struct EventStreamLogger<T: Data, S: Write> where T: Debug {
-
+pub struct EventStreamLogger<T: Data, S: Write> {
     buffer: RefCell<Vec<(T,u64)>>,
     stream: RefCell<Option<EventWriter<Product<RootTimestamp, u64>, (T,u64), S>>>,
     last_time: RefCell<u64>,
 }
 
-impl<T: Data, S: Write> Logger for EventStreamLogger<T, S> 
-    where T: Debug {
-
+impl<T: Data, S: Write> Logger for EventStreamLogger<T, S> {
     type Record = T;
     #[inline]
     fn log(&self, record: T) {
         self.buffer.borrow_mut().push((record, get_precise_time_ns()));
     }
     fn flush(&self) {
-        // TODO : sends progress update even if nothing happened.   
+        // TODO : sends progress update even if nothing happened.
         // TODO : consider a minimum interval from prior update to
         // TODO : cut down on the amount on logging, at the expense 
         // TODO : of freshness on the side of the reader.
         if let Some(ref mut writer) = *self.stream.borrow_mut() {
             let time = get_precise_time_ns();
             if self.buffer.borrow().len() > 0 {
-                //println!("{:?}", Event::Messages(RootTimestamp::new(*self.last_time.borrow()), self.buffer.borrow().clone()));
                 writer.push(Event::Messages(RootTimestamp::new(*self.last_time.borrow()), self.buffer.borrow().clone()));
             }
-            //println!("{:?}", vec![(RootTimestamp::new(*self.last_time.borrow()),-1), (RootTimestamp::new(time), 1)]);
-            //println!("{:?}", Event::Progress(vec![(RootTimestamp::new(*self.last_time.borrow()),-1), (RootTimestamp::new(time), 1)]));
             writer.push(Event::Progress(vec![(RootTimestamp::new(*self.last_time.borrow()),-1), (RootTimestamp::new(time), 1)]));
             *self.last_time.borrow_mut() = time;
             self.buffer.borrow_mut().clear();
@@ -92,7 +79,7 @@ impl<T: Data, S: Write> Logger for EventStreamLogger<T, S>
     }
 }
 
-impl<T: Data, S: Write> EventStreamLogger<T, S>  where T: Debug{
+impl<T: Data, S: Write> EventStreamLogger<T, S> {
     fn new() -> EventStreamLogger<T, S> {
         EventStreamLogger {
             buffer: RefCell::new(Vec::new()),
@@ -107,15 +94,12 @@ impl<T: Data, S: Write> EventStreamLogger<T, S>  where T: Debug{
     }
 }
 
-impl<T: Data, S: Write> Drop for EventStreamLogger<T, S>
-    where T: Debug {
+impl<T: Data, S: Write> Drop for EventStreamLogger<T, S> {
     fn drop(&mut self) {
         if let Some(ref mut writer) = *self.stream.borrow_mut() {
             if self.buffer.borrow().len() > 0 {
-                //println!("{:?}", Event::Messages(RootTimestamp::new(*self.last_time.borrow()), self.buffer.borrow().clone()));
                 writer.push(Event::Messages(RootTimestamp::new(*self.last_time.borrow()), self.buffer.borrow().clone()));
             }
-            //println!("{:?}", vec![(RootTimestamp::new(*self.last_time.borrow()),-1)]);
             writer.push(Event::Progress(vec![(RootTimestamp::new(*self.last_time.borrow()),-1)]));
         }
         else {
@@ -194,7 +178,7 @@ thread_local!{
     pub static GUARDED_PROGRESS: EventStreamLogger<bool, File> = EventStreamLogger::new();
 }
 
-#[derive(Clone)]
+#[derive(Debug, Clone)]
 /// The creation of an `Operate` implementor.
 pub struct OperatesEvent {
     /// Worker-unique identifier for the operator.
@@ -207,17 +191,7 @@ pub struct OperatesEvent {
 
 unsafe_abomonate!(OperatesEvent : addr, name);
 
-impl fmt::Debug for OperatesEvent {
-    fn fmt(&self, f:& mut fmt::Formatter) -> fmt::Result {
-        write!(f, "{{ \"OperatesEvent\": {{ \
-                        \"id\": {:?}, \
-                        \"addr\": {:?}, \
-                        \"name\": {:?} \
-                    }} }}", self.id, self.addr, self.name)
-    }
-}
-
-#[derive(Clone)]
+#[derive(Debug, Clone)]
 /// The creation of a channel between operators.
 pub struct ChannelsEvent {
     /// Worker-unique identifier for the channel
@@ -231,20 +205,6 @@ pub struct ChannelsEvent {
 }
 
 unsafe_abomonate!(ChannelsEvent : id, scope_addr, source, target);
-
-impl fmt::Debug for ChannelsEvent {
-    fn fmt(&self, f:& mut fmt::Formatter) -> fmt::Result {
-        let source = [self.source.0, self.source.1];
-        let target = [self.target.0, self.target.1];
-        write!(f, "{{ \"ChannelsEvent\": {{ \
-                         \"id\": {:?}, \
-                         \"scope_addr\": {:?}, \
-                         \"source\": {:?}, \
-                         \"target\": {:?}  \
-                   }} }}",
-            self.id, self.scope_addr, source, target)
-    }
-}
 
 #[derive(Debug, Clone)]
 /// Send or receive of progress information.
@@ -261,7 +221,7 @@ pub struct ProgressEvent {
 
 unsafe_abomonate!(ProgressEvent : is_send, addr, messages, internal);
 
-#[derive(Clone)]
+#[derive(Debug, Clone)]
 /// Message send or receive event
 pub struct MessagesEvent {
     /// `true` if send event, `false` if receive event.
@@ -279,20 +239,6 @@ pub struct MessagesEvent {
 }
 
 unsafe_abomonate!(MessagesEvent);
-
-impl fmt::Debug for MessagesEvent {
-    fn fmt(&self, f:& mut fmt::Formatter) -> fmt::Result {
-        write!(f, "{{ \"MessagesEvent\": {{ \
-                         \"is_send\": {:?}, \
-                         \"channel\": {:?}, \
-                         \"source\": {:?}, \
-                         \"target\": {:?}  \
-                         \"seq_no\": {:?}  \
-                         \"length\": {:?}  \
-                   }} }}",
-            self.is_send, self.channel, self.source, self.target, self.seq_no, self.length)
-    }
-}
 
 /// Records the starting and stopping of an operator.
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -330,25 +276,15 @@ fn start_stop_abomonation_roundtrip() {
     }
 }
 
-#[derive(Clone)]
+#[derive(Debug, Clone)]
 /// Operator start or stop.
 pub struct ScheduleEvent {
     /// Worker-unique identifier for the operator, linkable to the identifiers in `OperatesEvent`.
     pub id: usize,
     /// `Start` if the operator is starting, `Stop` if it is stopping.
-    /// activity is true if it looks like some useful work was performed during this call (data was
+    /// activiy is true if it looks like some useful work was performed during this call (data was
     /// read or written, notifications were requested / delivered)
     pub start_stop: StartStop,
 }
 
 unsafe_abomonate!(ScheduleEvent : id, start_stop);
-
-impl fmt::Debug for ScheduleEvent {
-    fn fmt(&self, f:& mut fmt::Formatter) -> fmt::Result {
-        write!(f, "{{ \"ScheduleEvent\": {{ \
-                         \"id\": {:?}, \
-                         \"start_stop\": {:?}, \
-                   }} }}",
-            self.id, self.start_stop)
-    }
-}

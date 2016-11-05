@@ -84,6 +84,7 @@ impl<T, D> Push<(T, Content<D>)> for Pusher<T, D> {
                 seq_no: self.counter,
                 length: data.len(),
             });
+
             ::vizlogging::log_message_info(::logging::MessagesEvent{
                 is_send: true,
                 channel: self.channel,
@@ -142,6 +143,7 @@ impl<T, D> Pull<(T, Content<D>)> for Puller<T, D> {
                 seq_no: message.seq,
                 length: message.data.len(),
             });
+
             ::vizlogging::log_message_info(::logging::MessagesEvent{
                 is_send: false,
                 channel: self.channel,

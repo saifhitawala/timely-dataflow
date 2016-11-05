@@ -759,7 +759,6 @@ impl<T: Timestamp> PerOperatorState<T> {
         path.push(index);
 
         ::logging::log(&::logging::OPERATES, ::logging::OperatesEvent { id: identifier, addr: path.clone(), name: scope.name().to_owned() });
-        ::vizlogging::log_operator_info(::logging::OperatesEvent { id: identifier, addr: path.clone(), name: scope.name().to_owned() });
 
         let local = scope.local();
         let inputs = scope.inputs();
@@ -874,9 +873,6 @@ impl<T: Timestamp> PerOperatorState<T> {
             ::logging::log(&::logging::SCHEDULE, ::logging::ScheduleEvent {
                 id: self.id, start_stop: ::logging::StartStop::Start
             });
-            ::vizlogging::log_schedule_info(::logging::ScheduleEvent {
-                id: self.id, start_stop: ::logging::StartStop::Start
-            });
 
             if cfg!(feature = "logging") {
                 for buffer in &[
@@ -907,9 +903,6 @@ impl<T: Timestamp> PerOperatorState<T> {
                                ::logging::ScheduleEvent {
                                    id: self.id, start_stop: ::logging::StartStop::Stop { activity: did_work }
                                });
-                ::vizlogging::log_schedule_info(::logging::ScheduleEvent{
-                    id: self.id, start_stop: ::logging::StartStop::Stop { activity: did_work }
-                });
             }
 
             result

@@ -23,7 +23,7 @@ fn main() {
         // introduce data and watch!
         for round in 0..3 {
             input.send(round);
-            println!("Epoch: {}", input.epoch());
+            //println!("Epoch: {}", input.epoch());
             input.advance_to(round + 1);
             while probe.le(&RootTimestamp::new(round)) {
                 computation.step();
