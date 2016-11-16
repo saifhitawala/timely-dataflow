@@ -1,0 +1,12 @@
+{ "Epoch":  0  }
+{ "MessagesEvent": { "channel": 1, "worker_id": 0, "number_of_records": 1  } }
+{ "MessagesEvent": { "channel": 3, "worker_id": 0, "number_of_records": 1  } }
+{ "MessagesEvent": { "channel": 5, "worker_id": 0, "number_of_records": 1  } }
+{ "Epoch":  1  }
+{ "MessagesEvent": { "channel": 1, "worker_id": 0, "number_of_records": 1  } }
+{ "MessagesEvent": { "channel": 3, "worker_id": 0, "number_of_records": 1  } }
+{ "MessagesEvent": { "channel": 5, "worker_id": 0, "number_of_records": 1  } }
+{ "Epoch":  2  }
+{ "MessagesEvent": { "channel": 1, "worker_id": 0, "number_of_records": 1  } }
+{ "MessagesEvent": { "channel": 3, "worker_id": 0, "number_of_records": 1  } }
+{ "MessagesEvent": { "channel": 5, "worker_id": 0, "number_of_records": 1  } }

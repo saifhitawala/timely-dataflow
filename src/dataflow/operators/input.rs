@@ -156,6 +156,7 @@ impl<T:Timestamp+Ord, D: Data> Handle<T, D> {
     pub fn send(&mut self, data: D) {
         // assert!(self.buffer.capacity() == Content::<D>::default_length());
         self.buffer.push(data);
+        ::vizlogging::get_epoch(self);
         if self.buffer.len() == self.buffer.capacity() {
             self.flush();
         }

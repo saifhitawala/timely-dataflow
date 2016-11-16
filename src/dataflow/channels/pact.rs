@@ -85,13 +85,10 @@ impl<T, D> Push<(T, Content<D>)> for Pusher<T, D> {
                 length: data.len(),
             });
 
-            ::vizlogging::log_message_info(::logging::MessagesEvent{
-                is_send: true,
+            ::vizlogging::log_message_info(::vizlogging::MessagesEvent{
                 channel: self.channel,
-                source: self.source,
-                target: self.target,
-                seq_no: self.counter,
-                length: data.len(),
+                worker_id: self.source,
+                number_of_records: data.len(),
             });
 
             let mut message = Some(Message::new(time, data, self.source, self.counter));
@@ -144,14 +141,6 @@ impl<T, D> Pull<(T, Content<D>)> for Puller<T, D> {
                 length: message.data.len(),
             });
 
-            ::vizlogging::log_message_info(::logging::MessagesEvent{
-                is_send: false,
-                channel: self.channel,
-                source: message.from,
-                target: self.index,
-                seq_no: message.seq,
-                length: message.data.len(),
-            });
         }
 
         self.current = previous.map(|message| (message.time, message.data));

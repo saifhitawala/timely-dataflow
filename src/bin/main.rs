@@ -5,20 +5,66 @@ use timely::dataflow::operators::*;
 use timely::progress::timestamp::RootTimestamp;
 
 fn main() {
+
+    //let iterations = std::env::args().nth(1).unwrap().parse::<u64>().unwrap();
+
     // initializes and runs a timely dataflow computation
-    timely::execute_from_args(std::env::args(), |computation| {
+    /*timely::execute_from_args(std::env::args().skip(2), move |computation| {
+        let index = computation.index();
+        computation.scoped(move |builder| {
+            let (helper, cycle) = builder.loop_variable(iterations, 1);
+            (0..1).take(if index == 0 { 1 } else { 0 })
+                  .to_stream(builder)
+                  .concat(&cycle)
+                  .exchange(|&x| x)
+                  .map_in_place(|x| *x += 1)
+                  .connect_loop(helper);
+        });
+    }).unwrap();*/
+
+    // let iterations = std::env::args().nth(1).unwrap().parse::<u64>().unwrap();
+
+    // initializes and runs a timely dataflow computation
+    timely::execute_from_args(std::env::args(), move |computation| {
 
         // create a new input, and inspect its output
         let (mut input, probe) = computation.scoped(move |scope| {
             let index = scope.index();
             let (input, stream) = scope.new_input();
             let probe = stream.exchange(|x| *x as u64)
-                .map(|x| vec![x, x+1, x+2])
-                .map(|x| x[0]*x[1]*x[2])
                 .inspect(move |x| println!("worker {}: \thello {}", index, x))
                 .probe().0;
             (input, probe)
         });
+
+        /*let mut input = computation.scoped(move |scope| {
+            let (input, stream) = scope.new_input();
+            let (helper, cycle) = scope.loop_variable(10, 1);
+            stream.concat(&cycle)
+                  .exchange(|&x| x)
+                  .map(|x| x + 1)
+                  .connect_loop(helper);
+            input
+        });
+
+        let (mut input, probe) = computation.scoped(move |outer| {
+            let (input, stream) = outer.new_input();
+            let result = outer.scoped(move |inner| {
+
+                // construct the same loop as before, but bind the result
+                // so we can both connect the loop, and return its output.
+                let (helper, cycle) = inner.loop_variable(iterations, 1);
+                let result = inner.enter(&stream)
+                                  .concat(&cycle)
+                                  .exchange(|&x| x)
+                                  .map(|x| x + 1);
+
+                result.connect_loop(helper);
+                result.leave()
+            });
+
+            (input, result.probe().0)
+        });*/
 
         // introduce data and watch!
         for round in 0..3 {
