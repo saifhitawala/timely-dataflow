@@ -146,22 +146,32 @@ pub fn log_operator_info(operate_event: OperatesEvent) {
             .unwrap();
 
             let mut f = BufWriter::new(file);
-            f.write_fmt(format_args!("{{ \"OperatesEvent\": {{ \
-                         \"id\": {:?}, \
-                         \"addr\": {:?}, \
-                         \"name\": {:?} \
-                   }} }}\n",
-            operate_event.id, operate_event.addr, operate_event.name)).expect("Unable to write data");
+            worker_index.with(|wid| {
+                if *wid.borrow() == 0 
+                {
+                    f.write_fmt(format_args!("{{ \"OperatesEvent\": {{ \
+                                 \"id\": {:?}, \
+                                 \"addr\": {:?}, \
+                                 \"name\": {:?} \
+                           }} }}\n",
+                    operate_event.id, operate_event.addr, operate_event.name)).expect("Unable to write data");
+                }
+            });  
         }
         else{
             let f = File::create(path).expect("Unable to create file");
             let mut f = BufWriter::new(f);
-            f.write_fmt(format_args!("{{ \"OperatesEvent\": {{ \
-                         \"id\": {:?}, \
-                         \"addr\": {:?}, \
-                         \"name\": {:?} \
-                   }} }}\n",
-            operate_event.id, operate_event.addr, operate_event.name)).expect("Unable to write data");
+            worker_index.with(|wid| {
+                if *wid.borrow() == 0 
+                {
+                    f.write_fmt(format_args!("{{ \"OperatesEvent\": {{ \
+                                 \"id\": {:?}, \
+                                 \"addr\": {:?}, \
+                                 \"name\": {:?} \
+                           }} }}\n",
+                    operate_event.id, operate_event.addr, operate_event.name)).expect("Unable to write data");
+                }
+            }); 
         }
 
     }
@@ -183,26 +193,36 @@ pub fn log_channel_info(channel_event: ChannelsEvent) {
             .unwrap();
 
             let mut f = BufWriter::new(file);
-            f.write_fmt(format_args!("{{ \"ChannelsEvent\": {{ \
-                         \"id\": {:?}, \
-                         \"scope_addr\": {:?}, \
-                         \"source\": {:?}, \
-                         \"target\": {:?} \
-                   }} }}\n",
-            channel_event.id, channel_event.scope_addr, channel_event.source, channel_event.target)).expect("Unable to write data");
+            worker_index.with(|wid| {
+                if *wid.borrow() == 0 
+                {
+                    f.write_fmt(format_args!("{{ \"ChannelsEvent\": {{ \
+                                 \"id\": {:?}, \
+                                 \"scope_addr\": {:?}, \
+                                 \"source\": {:?}, \
+                                 \"target\": {:?} \
+                           }} }}\n",
+                    channel_event.id, channel_event.scope_addr, vec![channel_event.source.0, channel_event.source.1], vec![channel_event.target.0, channel_event.target.1])).expect("Unable to write data");   
+                }
+            }); 
+            
         }
         else{
             let f = File::create(path).expect("Unable to create file");
             let mut f = BufWriter::new(f);
-            f.write_fmt(format_args!("{{ \"ChannelsEvent\": {{ \
-                         \"id\": {:?}, \
-                         \"scope_addr\": {:?}, \
-                         \"source\": {:?}, \
-                         \"target\": {:?} \
-                   }} }}\n",
-            channel_event.id, channel_event.scope_addr, channel_event.source, channel_event.target)).expect("Unable to write data");
-        }
-
+            worker_index.with(|wid| {
+                if *wid.borrow() == 0 
+                {
+                    f.write_fmt(format_args!("{{ \"ChannelsEvent\": {{ \
+                                 \"id\": {:?}, \
+                                 \"scope_addr\": {:?}, \
+                                 \"source\": {:?}, \
+                                 \"target\": {:?} \
+                           }} }}\n",
+                    channel_event.id, channel_event.scope_addr, vec![channel_event.source.0, channel_event.source.1], vec![channel_event.target.0, channel_event.target.1])).expect("Unable to write data");   
+                }
+            });
+        }    
     }
 }
 
