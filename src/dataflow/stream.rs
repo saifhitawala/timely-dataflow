@@ -41,6 +41,13 @@ impl<S: Scope, D:Data> Stream<S, D> {
             target: (target.index, target.port),
         });
 
+        ::vizlogging::log_channel_info(::vizlogging::ChannelsEvent {
+            id: identifier,
+            scope_addr: self.scope.addr(),
+            source: (self.name.index, self.name.port),
+            target: (target.index, target.port),
+        });
+
         self.scope.add_edge(self.name, target);
         self.ports.add_pusher(pusher);
     }

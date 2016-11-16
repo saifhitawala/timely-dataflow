@@ -1,0 +1,333 @@
+{ "OperatesEvent": { "id": 0, "addr": [0, 0, 1], "name": "Input" } }
+{ "OperatesEvent": { "id": 0, "addr": [7, 0, 1], "name": "Input" } }
+{ "OperatesEvent": { "id": 0, "addr": [5, 0, 1], "name": "Input" } }
+{ "OperatesEvent": { "id": 0, "addr": [3, 0, 1], "name": "Input" } }
+{ "OperatesEvent": { "id": 0, "addr": [1, 0, 1], "name": "Input" } }
+{ "OperatesEvent": { "id": 2, "addr": [2, 0, 2], "name": "Exchange" } }
+{ "OperatesEvent": { "id": 2, "addr": [6, 0, 2], "name": "Exchange" } }
+{ "OperatesEvent": { "id": 2, "addr": [7, 0, 2], "name": "Exchange" } }
+{ "ChannelsEvent": { "id": 1, "scope_addr": [6, 0], "source": (1, 0), "target": (2, 0) } }
+{ "OperatesEvent": { "id": 2, "addr": [1, 0, 2], "name": "Exchange" } }
+{ "OperatesEvent": { "id": 2, "addr": [5, 0, 2], "name": "Exchange" } }
+{ "OperatesEvent": { "id": 2, "addr": [4, 0, 2], "name": "Exchange" } }
+{ "OperatesEvent": { "id": 2, "addr": [3, 0, 2], "name": "Exchange" } }
+{ "OperatesEvent": { "id": 4, "addr": [6, 0, 3], "name": "Inspect" } }
+{ "ChannelsEvent": { "id": 1, "scope_addr": [2, 0], "source": (1, 0), "target": (2, 0) } }
+{ "ChannelsEvent": { "id": 1, "scope_addr": [4, 0], "source": (1, 0), "target": (2, 0) } }
+{ "ChannelsEvent": { "id": 3, "scope_addr": [6, 0], "source": (2, 0), "target": (3, 0) } }
+{ "ChannelsEvent": { "id": 1, "scope_addr": [1, 0], "source": (1, 0), "target": (2, 0) } }
+{ "ChannelsEvent": { "id": 1, "scope_addr": [7, 0], "source": (1, 0), "target": (2, 0) } }
+{ "ChannelsEvent": { "id": 1, "scope_addr": [3, 0], "source": (1, 0), "target": (2, 0) } }
+{ "ChannelsEvent": { "id": 1, "scope_addr": [5, 0], "source": (1, 0), "target": (2, 0) } }
+{ "OperatesEvent": { "id": 4, "addr": [2, 0, 3], "name": "Inspect" } }
+{ "OperatesEvent": { "id": 6, "addr": [6, 0, 4], "name": "Map" } }
+{ "OperatesEvent": { "id": 4, "addr": [3, 0, 3], "name": "Inspect" } }
+{ "OperatesEvent": { "id": 4, "addr": [7, 0, 3], "name": "Inspect" } }
+{ "OperatesEvent": { "id": 4, "addr": [1, 0, 3], "name": "Inspect" } }
+{ "OperatesEvent": { "id": 4, "addr": [4, 0, 3], "name": "Inspect" } }
+{ "OperatesEvent": { "id": 4, "addr": [5, 0, 3], "name": "Inspect" } }
+{ "ChannelsEvent": { "id": 5, "scope_addr": [6, 0], "source": (3, 0), "target": (4, 0) } }
+{ "ChannelsEvent": { "id": 3, "scope_addr": [2, 0], "source": (2, 0), "target": (3, 0) } }
+{ "ChannelsEvent": { "id": 3, "scope_addr": [7, 0], "source": (2, 0), "target": (3, 0) } }
+{ "ChannelsEvent": { "id": 3, "scope_addr": [1, 0], "source": (2, 0), "target": (3, 0) } }
+{ "ChannelsEvent": { "id": 3, "scope_addr": [4, 0], "source": (2, 0), "target": (3, 0) } }
+{ "ChannelsEvent": { "id": 3, "scope_addr": [5, 0], "source": (2, 0), "target": (3, 0) } }
+{ "OperatesEvent": { "id": 2, "addr": [0, 0, 2], "name": "Exchange" } }
+{ "OperatesEvent": { "id": 6, "addr": [2, 0, 4], "name": "Map" } }
+{ "OperatesEvent": { "id": 6, "addr": [7, 0, 4], "name": "Map" } }
+{ "OperatesEvent": { "id": 6, "addr": [4, 0, 4], "name": "Map" } }
+{ "OperatesEvent": { "id": 6, "addr": [1, 0, 4], "name": "Map" } }
+{ "OperatesEvent": { "id": 6, "addr": [5, 0, 4], "name": "Map" } }
+{ "ChannelsEvent": { "id": 5, "scope_addr": [4, 0], "source": (3, 0), "target": (4, 0) } }
+{ "ChannelsEvent": { "id": 5, "scope_addr": [7, 0], "source": (3, 0), "target": (4, 0) } }
+{ "ChannelsEvent": { "id": 5, "scope_addr": [2, 0], "source": (3, 0), "target": (4, 0) } }
+{ "ChannelsEvent": { "id": 3, "scope_addr": [3, 0], "source": (2, 0), "target": (3, 0) } }
+{ "ChannelsEvent": { "id": 5, "scope_addr": [1, 0], "source": (3, 0), "target": (4, 0) } }
+{ "ChannelsEvent": { "id": 1, "scope_addr": [0, 0], "source": (1, 0), "target": (2, 0) } }
+{ "ChannelsEvent": { "id": 5, "scope_addr": [5, 0], "source": (3, 0), "target": (4, 0) } }
+{ "OperatesEvent": { "id": 8, "addr": [6, 0, 5], "name": "Inspect" } }
+{ "OperatesEvent": { "id": 8, "addr": [2, 0, 5], "name": "Inspect" } }
+{ "OperatesEvent": { "id": 8, "addr": [4, 0, 5], "name": "Inspect" } }
+{ "OperatesEvent": { "id": 8, "addr": [7, 0, 5], "name": "Inspect" } }
+{ "OperatesEvent": { "id": 6, "addr": [3, 0, 4], "name": "Map" } }
+{ "OperatesEvent": { "id": 4, "addr": [0, 0, 3], "name": "Inspect" } }
+{ "OperatesEvent": { "id": 8, "addr": [1, 0, 5], "name": "Inspect" } }
+{ "OperatesEvent": { "id": 8, "addr": [5, 0, 5], "name": "Inspect" } }
+{ "ChannelsEvent": { "id": 7, "scope_addr": [2, 0], "source": (4, 0), "target": (5, 0) } }
+{ "ChannelsEvent": { "id": 7, "scope_addr": [4, 0], "source": (4, 0), "target": (5, 0) } }
+{ "ChannelsEvent": { "id": 7, "scope_addr": [6, 0], "source": (4, 0), "target": (5, 0) } }
+{ "ChannelsEvent": { "id": 7, "scope_addr": [7, 0], "source": (4, 0), "target": (5, 0) } }
+{ "ChannelsEvent": { "id": 3, "scope_addr": [0, 0], "source": (2, 0), "target": (3, 0) } }
+{ "ChannelsEvent": { "id": 5, "scope_addr": [3, 0], "source": (3, 0), "target": (4, 0) } }
+{ "ChannelsEvent": { "id": 7, "scope_addr": [1, 0], "source": (4, 0), "target": (5, 0) } }
+{ "ChannelsEvent": { "id": 7, "scope_addr": [5, 0], "source": (4, 0), "target": (5, 0) } }
+{ "OperatesEvent": { "id": 10, "addr": [2, 0, 6], "name": "Filter" } }
+{ "OperatesEvent": { "id": 10, "addr": [4, 0, 6], "name": "Filter" } }
+{ "OperatesEvent": { "id": 10, "addr": [7, 0, 6], "name": "Filter" } }
+{ "OperatesEvent": { "id": 10, "addr": [6, 0, 6], "name": "Filter" } }
+{ "OperatesEvent": { "id": 10, "addr": [1, 0, 6], "name": "Filter" } }
+{ "OperatesEvent": { "id": 6, "addr": [0, 0, 4], "name": "Map" } }
+{ "OperatesEvent": { "id": 8, "addr": [3, 0, 5], "name": "Inspect" } }
+{ "OperatesEvent": { "id": 10, "addr": [5, 0, 6], "name": "Filter" } }
+{ "ChannelsEvent": { "id": 9, "scope_addr": [2, 0], "source": (5, 0), "target": (6, 0) } }
+{ "ChannelsEvent": { "id": 9, "scope_addr": [7, 0], "source": (5, 0), "target": (6, 0) } }
+{ "ChannelsEvent": { "id": 9, "scope_addr": [6, 0], "source": (5, 0), "target": (6, 0) } }
+{ "ChannelsEvent": { "id": 5, "scope_addr": [0, 0], "source": (3, 0), "target": (4, 0) } }
+{ "ChannelsEvent": { "id": 9, "scope_addr": [1, 0], "source": (5, 0), "target": (6, 0) } }
+{ "OperatesEvent": { "id": 12, "addr": [2, 0, 7], "name": "Inspect" } }
+{ "OperatesEvent": { "id": 12, "addr": [6, 0, 7], "name": "Inspect" } }
+{ "OperatesEvent": { "id": 12, "addr": [7, 0, 7], "name": "Inspect" } }
+{ "OperatesEvent": { "id": 8, "addr": [0, 0, 5], "name": "Inspect" } }
+{ "OperatesEvent": { "id": 12, "addr": [1, 0, 7], "name": "Inspect" } }
+{ "ChannelsEvent": { "id": 9, "scope_addr": [5, 0], "source": (5, 0), "target": (6, 0) } }
+{ "ChannelsEvent": { "id": 11, "scope_addr": [2, 0], "source": (6, 0), "target": (7, 0) } }
+{ "ChannelsEvent": { "id": 11, "scope_addr": [7, 0], "source": (6, 0), "target": (7, 0) } }
+{ "ChannelsEvent": { "id": 11, "scope_addr": [6, 0], "source": (6, 0), "target": (7, 0) } }
+{ "ChannelsEvent": { "id": 7, "scope_addr": [0, 0], "source": (4, 0), "target": (5, 0) } }
+{ "ChannelsEvent": { "id": 9, "scope_addr": [4, 0], "source": (5, 0), "target": (6, 0) } }
+{ "OperatesEvent": { "id": 14, "addr": [7, 0, 8], "name": "MapInPlace" } }
+{ "ChannelsEvent": { "id": 11, "scope_addr": [1, 0], "source": (6, 0), "target": (7, 0) } }
+{ "OperatesEvent": { "id": 14, "addr": [2, 0, 8], "name": "MapInPlace" } }
+{ "OperatesEvent": { "id": 12, "addr": [5, 0, 7], "name": "Inspect" } }
+{ "OperatesEvent": { "id": 14, "addr": [6, 0, 8], "name": "MapInPlace" } }
+{ "OperatesEvent": { "id": 10, "addr": [0, 0, 6], "name": "Filter" } }
+{ "ChannelsEvent": { "id": 7, "scope_addr": [3, 0], "source": (4, 0), "target": (5, 0) } }
+{ "OperatesEvent": { "id": 12, "addr": [4, 0, 7], "name": "Inspect" } }
+{ "OperatesEvent": { "id": 14, "addr": [1, 0, 8], "name": "MapInPlace" } }
+{ "ChannelsEvent": { "id": 13, "scope_addr": [7, 0], "source": (7, 0), "target": (8, 0) } }
+{ "ChannelsEvent": { "id": 13, "scope_addr": [2, 0], "source": (7, 0), "target": (8, 0) } }
+{ "ChannelsEvent": { "id": 9, "scope_addr": [0, 0], "source": (5, 0), "target": (6, 0) } }
+{ "ChannelsEvent": { "id": 13, "scope_addr": [6, 0], "source": (7, 0), "target": (8, 0) } }
+{ "ChannelsEvent": { "id": 11, "scope_addr": [5, 0], "source": (6, 0), "target": (7, 0) } }
+{ "OperatesEvent": { "id": 10, "addr": [3, 0, 6], "name": "Filter" } }
+{ "ChannelsEvent": { "id": 13, "scope_addr": [1, 0], "source": (7, 0), "target": (8, 0) } }
+{ "ChannelsEvent": { "id": 11, "scope_addr": [4, 0], "source": (6, 0), "target": (7, 0) } }
+{ "OperatesEvent": { "id": 16, "addr": [7, 0, 9], "name": "Inspect" } }
+{ "OperatesEvent": { "id": 16, "addr": [2, 0, 9], "name": "Inspect" } }
+{ "OperatesEvent": { "id": 12, "addr": [0, 0, 7], "name": "Inspect" } }
+{ "OperatesEvent": { "id": 14, "addr": [5, 0, 8], "name": "MapInPlace" } }
+{ "OperatesEvent": { "id": 16, "addr": [6, 0, 9], "name": "Inspect" } }
+{ "ChannelsEvent": { "id": 9, "scope_addr": [3, 0], "source": (5, 0), "target": (6, 0) } }
+{ "OperatesEvent": { "id": 14, "addr": [4, 0, 8], "name": "MapInPlace" } }
+{ "ChannelsEvent": { "id": 15, "scope_addr": [7, 0], "source": (8, 0), "target": (9, 0) } }
+{ "OperatesEvent": { "id": 16, "addr": [1, 0, 9], "name": "Inspect" } }
+{ "ChannelsEvent": { "id": 13, "scope_addr": [5, 0], "source": (7, 0), "target": (8, 0) } }
+{ "ChannelsEvent": { "id": 11, "scope_addr": [0, 0], "source": (6, 0), "target": (7, 0) } }
+{ "ChannelsEvent": { "id": 15, "scope_addr": [6, 0], "source": (8, 0), "target": (9, 0) } }
+{ "OperatesEvent": { "id": 12, "addr": [3, 0, 7], "name": "Inspect" } }
+{ "ChannelsEvent": { "id": 13, "scope_addr": [4, 0], "source": (7, 0), "target": (8, 0) } }
+{ "OperatesEvent": { "id": 14, "addr": [0, 0, 8], "name": "MapInPlace" } }
+{ "OperatesEvent": { "id": 16, "addr": [5, 0, 9], "name": "Inspect" } }
+{ "ChannelsEvent": { "id": 11, "scope_addr": [3, 0], "source": (6, 0), "target": (7, 0) } }
+{ "OperatesEvent": { "id": 16, "addr": [4, 0, 9], "name": "Inspect" } }
+{ "ChannelsEvent": { "id": 13, "scope_addr": [0, 0], "source": (7, 0), "target": (8, 0) } }
+{ "ChannelsEvent": { "id": 15, "scope_addr": [5, 0], "source": (8, 0), "target": (9, 0) } }
+{ "OperatesEvent": { "id": 14, "addr": [3, 0, 8], "name": "MapInPlace" } }
+{ "ChannelsEvent": { "id": 15, "scope_addr": [4, 0], "source": (8, 0), "target": (9, 0) } }
+{ "ChannelsEvent": { "id": 15, "scope_addr": [1, 0], "source": (8, 0), "target": (9, 0) } }
+{ "OperatesEvent": { "id": 16, "addr": [0, 0, 9], "name": "Inspect" } }
+{ "ChannelsEvent": { "id": 15, "scope_addr": [0, 0], "source": (8, 0), "target": (9, 0) } }
+{ "ChannelsEvent": { "id": 13, "scope_addr": [3, 0], "source": (7, 0), "target": (8, 0) } }
+{ "ChannelsEvent": { "id": 15, "scope_addr": [2, 0], "source": (8, 0), "target": (9, 0) } }
+{ "OperatesEvent": { "id": 16, "addr": [3, 0, 9], "name": "Inspect" } }
+{ "ChannelsEvent": { "id": 15, "scope_addr": [3, 0], "source": (8, 0), "target": (9, 0) } }
+{ "OperatesEvent": { "id": 18, "addr": [5, 0, 10], "name": "Accumulate" } }
+{ "OperatesEvent": { "id": 18, "addr": [4, 0, 10], "name": "Accumulate" } }
+{ "OperatesEvent": { "id": 18, "addr": [7, 0, 10], "name": "Accumulate" } }
+{ "OperatesEvent": { "id": 18, "addr": [3, 0, 10], "name": "Accumulate" } }
+{ "OperatesEvent": { "id": 18, "addr": [6, 0, 10], "name": "Accumulate" } }
+{ "OperatesEvent": { "id": 18, "addr": [1, 0, 10], "name": "Accumulate" } }
+{ "OperatesEvent": { "id": 18, "addr": [2, 0, 10], "name": "Accumulate" } }
+{ "ChannelsEvent": { "id": 17, "scope_addr": [4, 0], "source": (9, 0), "target": (10, 0) } }
+{ "ChannelsEvent": { "id": 17, "scope_addr": [5, 0], "source": (9, 0), "target": (10, 0) } }
+{ "ChannelsEvent": { "id": 17, "scope_addr": [6, 0], "source": (9, 0), "target": (10, 0) } }
+{ "ChannelsEvent": { "id": 17, "scope_addr": [7, 0], "source": (9, 0), "target": (10, 0) } }
+{ "ChannelsEvent": { "id": 17, "scope_addr": [2, 0], "source": (9, 0), "target": (10, 0) } }
+{ "ChannelsEvent": { "id": 17, "scope_addr": [1, 0], "source": (9, 0), "target": (10, 0) } }
+{ "ChannelsEvent": { "id": 17, "scope_addr": [3, 0], "source": (9, 0), "target": (10, 0) } }
+{ "OperatesEvent": { "id": 18, "addr": [0, 0, 10], "name": "Accumulate" } }
+{ "OperatesEvent": { "id": 20, "addr": [4, 0, 11], "name": "Inspect" } }
+{ "OperatesEvent": { "id": 20, "addr": [2, 0, 11], "name": "Inspect" } }
+{ "OperatesEvent": { "id": 20, "addr": [3, 0, 11], "name": "Inspect" } }
+{ "OperatesEvent": { "id": 20, "addr": [1, 0, 11], "name": "Inspect" } }
+{ "OperatesEvent": { "id": 20, "addr": [5, 0, 11], "name": "Inspect" } }
+{ "OperatesEvent": { "id": 20, "addr": [7, 0, 11], "name": "Inspect" } }
+{ "OperatesEvent": { "id": 20, "addr": [6, 0, 11], "name": "Inspect" } }
+{ "ChannelsEvent": { "id": 19, "scope_addr": [4, 0], "source": (10, 0), "target": (11, 0) } }
+{ "ChannelsEvent": { "id": 19, "scope_addr": [2, 0], "source": (10, 0), "target": (11, 0) } }
+{ "ChannelsEvent": { "id": 19, "scope_addr": [1, 0], "source": (10, 0), "target": (11, 0) } }
+{ "ChannelsEvent": { "id": 19, "scope_addr": [3, 0], "source": (10, 0), "target": (11, 0) } }
+{ "ChannelsEvent": { "id": 19, "scope_addr": [5, 0], "source": (10, 0), "target": (11, 0) } }
+{ "ChannelsEvent": { "id": 19, "scope_addr": [7, 0], "source": (10, 0), "target": (11, 0) } }
+{ "OperatesEvent": { "id": 22, "addr": [2, 0, 12], "name": "Broadcast" } }
+{ "ChannelsEvent": { "id": 19, "scope_addr": [6, 0], "source": (10, 0), "target": (11, 0) } }
+{ "OperatesEvent": { "id": 22, "addr": [4, 0, 12], "name": "Broadcast" } }
+{ "ChannelsEvent": { "id": 17, "scope_addr": [0, 0], "source": (9, 0), "target": (10, 0) } }
+{ "OperatesEvent": { "id": 22, "addr": [1, 0, 12], "name": "Broadcast" } }
+{ "OperatesEvent": { "id": 22, "addr": [3, 0, 12], "name": "Broadcast" } }
+{ "OperatesEvent": { "id": 22, "addr": [7, 0, 12], "name": "Broadcast" } }
+{ "OperatesEvent": { "id": 22, "addr": [6, 0, 12], "name": "Broadcast" } }
+{ "OperatesEvent": { "id": 20, "addr": [0, 0, 11], "name": "Inspect" } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [4, 0], "source": (11, 0), "target": (12, 0) } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [1, 0], "source": (11, 0), "target": (12, 0) } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [7, 0], "source": (11, 0), "target": (12, 0) } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [6, 0], "source": (11, 0), "target": (12, 0) } }
+{ "ChannelsEvent": { "id": 19, "scope_addr": [0, 0], "source": (10, 0), "target": (11, 0) } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [1, 0], "source": (11, 0), "target": (12, 1) } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [4, 0], "source": (11, 0), "target": (12, 1) } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [3, 0], "source": (11, 0), "target": (12, 0) } }
+{ "OperatesEvent": { "id": 22, "addr": [5, 0, 12], "name": "Broadcast" } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [2, 0], "source": (11, 0), "target": (12, 0) } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [7, 0], "source": (11, 0), "target": (12, 1) } }
+{ "OperatesEvent": { "id": 22, "addr": [0, 0, 12], "name": "Broadcast" } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [6, 0], "source": (11, 0), "target": (12, 1) } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [4, 0], "source": (11, 0), "target": (12, 2) } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [1, 0], "source": (11, 0), "target": (12, 2) } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [3, 0], "source": (11, 0), "target": (12, 1) } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [7, 0], "source": (11, 0), "target": (12, 2) } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [2, 0], "source": (11, 0), "target": (12, 1) } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [0, 0], "source": (11, 0), "target": (12, 0) } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [3, 0], "source": (11, 0), "target": (12, 2) } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [5, 0], "source": (11, 0), "target": (12, 0) } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [6, 0], "source": (11, 0), "target": (12, 2) } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [4, 0], "source": (11, 0), "target": (12, 3) } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [1, 0], "source": (11, 0), "target": (12, 3) } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [7, 0], "source": (11, 0), "target": (12, 3) } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [2, 0], "source": (11, 0), "target": (12, 2) } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [5, 0], "source": (11, 0), "target": (12, 1) } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [0, 0], "source": (11, 0), "target": (12, 1) } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [6, 0], "source": (11, 0), "target": (12, 3) } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [3, 0], "source": (11, 0), "target": (12, 3) } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [7, 0], "source": (11, 0), "target": (12, 4) } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [1, 0], "source": (11, 0), "target": (12, 4) } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [4, 0], "source": (11, 0), "target": (12, 4) } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [2, 0], "source": (11, 0), "target": (12, 3) } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [5, 0], "source": (11, 0), "target": (12, 2) } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [7, 0], "source": (11, 0), "target": (12, 5) } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [6, 0], "source": (11, 0), "target": (12, 4) } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [0, 0], "source": (11, 0), "target": (12, 2) } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [2, 0], "source": (11, 0), "target": (12, 4) } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [3, 0], "source": (11, 0), "target": (12, 4) } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [1, 0], "source": (11, 0), "target": (12, 5) } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [4, 0], "source": (11, 0), "target": (12, 5) } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [5, 0], "source": (11, 0), "target": (12, 3) } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [6, 0], "source": (11, 0), "target": (12, 5) } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [2, 0], "source": (11, 0), "target": (12, 5) } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [1, 0], "source": (11, 0), "target": (12, 6) } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [0, 0], "source": (11, 0), "target": (12, 3) } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [3, 0], "source": (11, 0), "target": (12, 5) } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [4, 0], "source": (11, 0), "target": (12, 6) } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [7, 0], "source": (11, 0), "target": (12, 6) } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [6, 0], "source": (11, 0), "target": (12, 6) } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [5, 0], "source": (11, 0), "target": (12, 4) } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [1, 0], "source": (11, 0), "target": (12, 7) } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [2, 0], "source": (11, 0), "target": (12, 6) } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [0, 0], "source": (11, 0), "target": (12, 4) } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [3, 0], "source": (11, 0), "target": (12, 6) } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [7, 0], "source": (11, 0), "target": (12, 7) } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [4, 0], "source": (11, 0), "target": (12, 7) } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [6, 0], "source": (11, 0), "target": (12, 7) } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [5, 0], "source": (11, 0), "target": (12, 5) } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [2, 0], "source": (11, 0), "target": (12, 7) } }
+{ "OperatesEvent": { "id": 24, "addr": [1, 0, 13], "name": "Inspect" } }
+{ "OperatesEvent": { "id": 24, "addr": [7, 0, 13], "name": "Inspect" } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [3, 0], "source": (11, 0), "target": (12, 7) } }
+{ "OperatesEvent": { "id": 24, "addr": [4, 0, 13], "name": "Inspect" } }
+{ "OperatesEvent": { "id": 24, "addr": [6, 0, 13], "name": "Inspect" } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [5, 0], "source": (11, 0), "target": (12, 6) } }
+{ "ChannelsEvent": { "id": 23, "scope_addr": [7, 0], "source": (12, 0), "target": (13, 0) } }
+{ "ChannelsEvent": { "id": 23, "scope_addr": [1, 0], "source": (12, 0), "target": (13, 0) } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [0, 0], "source": (11, 0), "target": (12, 5) } }
+{ "ChannelsEvent": { "id": 23, "scope_addr": [6, 0], "source": (12, 0), "target": (13, 0) } }
+{ "ChannelsEvent": { "id": 23, "scope_addr": [4, 0], "source": (12, 0), "target": (13, 0) } }
+{ "OperatesEvent": { "id": 24, "addr": [3, 0, 13], "name": "Inspect" } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [5, 0], "source": (11, 0), "target": (12, 7) } }
+{ "OperatesEvent": { "id": 26, "addr": [1, 0, 14], "name": "Map" } }
+{ "OperatesEvent": { "id": 26, "addr": [6, 0, 14], "name": "Map" } }
+{ "OperatesEvent": { "id": 26, "addr": [4, 0, 14], "name": "Map" } }
+{ "ChannelsEvent": { "id": 25, "scope_addr": [6, 0], "source": (13, 0), "target": (14, 0) } }
+{ "ChannelsEvent": { "id": 25, "scope_addr": [1, 0], "source": (13, 0), "target": (14, 0) } }
+{ "ChannelsEvent": { "id": 25, "scope_addr": [4, 0], "source": (13, 0), "target": (14, 0) } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [0, 0], "source": (11, 0), "target": (12, 6) } }
+{ "OperatesEvent": { "id": 28, "addr": [6, 0, 15], "name": "Inspect" } }
+{ "OperatesEvent": { "id": 28, "addr": [4, 0, 15], "name": "Inspect" } }
+{ "OperatesEvent": { "id": 28, "addr": [1, 0, 15], "name": "Inspect" } }
+{ "ChannelsEvent": { "id": 21, "scope_addr": [0, 0], "source": (11, 0), "target": (12, 7) } }
+{ "OperatesEvent": { "id": 24, "addr": [5, 0, 13], "name": "Inspect" } }
+{ "OperatesEvent": { "id": 26, "addr": [7, 0, 14], "name": "Map" } }
+{ "OperatesEvent": { "id": 24, "addr": [2, 0, 13], "name": "Inspect" } }
+{ "ChannelsEvent": { "id": 23, "scope_addr": [3, 0], "source": (12, 0), "target": (13, 0) } }
+{ "ChannelsEvent": { "id": 27, "scope_addr": [6, 0], "source": (14, 0), "target": (15, 0) } }
+{ "ChannelsEvent": { "id": 27, "scope_addr": [1, 0], "source": (14, 0), "target": (15, 0) } }
+{ "ChannelsEvent": { "id": 27, "scope_addr": [4, 0], "source": (14, 0), "target": (15, 0) } }
+{ "OperatesEvent": { "id": 24, "addr": [0, 0, 13], "name": "Inspect" } }
+{ "ChannelsEvent": { "id": 23, "scope_addr": [5, 0], "source": (12, 0), "target": (13, 0) } }
+{ "OperatesEvent": { "id": 26, "addr": [3, 0, 14], "name": "Map" } }
+{ "OperatesEvent": { "id": 30, "addr": [6, 0, 16], "name": "InspectBatch" } }
+{ "OperatesEvent": { "id": 30, "addr": [4, 0, 16], "name": "InspectBatch" } }
+{ "OperatesEvent": { "id": 30, "addr": [1, 0, 16], "name": "InspectBatch" } }
+{ "ChannelsEvent": { "id": 23, "scope_addr": [0, 0], "source": (12, 0), "target": (13, 0) } }
+{ "OperatesEvent": { "id": 26, "addr": [5, 0, 14], "name": "Map" } }
+{ "ChannelsEvent": { "id": 23, "scope_addr": [2, 0], "source": (12, 0), "target": (13, 0) } }
+{ "ChannelsEvent": { "id": 29, "scope_addr": [6, 0], "source": (15, 0), "target": (16, 0) } }
+{ "ChannelsEvent": { "id": 25, "scope_addr": [3, 0], "source": (13, 0), "target": (14, 0) } }
+{ "ChannelsEvent": { "id": 29, "scope_addr": [4, 0], "source": (15, 0), "target": (16, 0) } }
+{ "ChannelsEvent": { "id": 29, "scope_addr": [1, 0], "source": (15, 0), "target": (16, 0) } }
+{ "ChannelsEvent": { "id": 25, "scope_addr": [5, 0], "source": (13, 0), "target": (14, 0) } }
+{ "OperatesEvent": { "id": 26, "addr": [2, 0, 14], "name": "Map" } }
+{ "OperatesEvent": { "id": 32, "addr": [6, 0, 17], "name": "Accumulate" } }
+{ "OperatesEvent": { "id": 32, "addr": [1, 0, 17], "name": "Accumulate" } }
+{ "OperatesEvent": { "id": 32, "addr": [4, 0, 17], "name": "Accumulate" } }
+{ "OperatesEvent": { "id": 28, "addr": [3, 0, 15], "name": "Inspect" } }
+{ "OperatesEvent": { "id": 26, "addr": [0, 0, 14], "name": "Map" } }
+{ "ChannelsEvent": { "id": 25, "scope_addr": [7, 0], "source": (13, 0), "target": (14, 0) } }
+{ "OperatesEvent": { "id": 28, "addr": [5, 0, 15], "name": "Inspect" } }
+{ "ChannelsEvent": { "id": 25, "scope_addr": [2, 0], "source": (13, 0), "target": (14, 0) } }
+{ "ChannelsEvent": { "id": 31, "scope_addr": [4, 0], "source": (16, 0), "target": (17, 0) } }
+{ "ChannelsEvent": { "id": 31, "scope_addr": [6, 0], "source": (16, 0), "target": (17, 0) } }
+{ "ChannelsEvent": { "id": 31, "scope_addr": [1, 0], "source": (16, 0), "target": (17, 0) } }
+{ "ChannelsEvent": { "id": 27, "scope_addr": [3, 0], "source": (14, 0), "target": (15, 0) } }
+{ "ChannelsEvent": { "id": 25, "scope_addr": [0, 0], "source": (13, 0), "target": (14, 0) } }
+{ "ChannelsEvent": { "id": 27, "scope_addr": [5, 0], "source": (14, 0), "target": (15, 0) } }
+{ "OperatesEvent": { "id": 28, "addr": [7, 0, 15], "name": "Inspect" } }
+{ "OperatesEvent": { "id": 28, "addr": [2, 0, 15], "name": "Inspect" } }
+{ "OperatesEvent": { "id": 34, "addr": [4, 0, 18], "name": "Probe" } }
+{ "OperatesEvent": { "id": 34, "addr": [1, 0, 18], "name": "Probe" } }
+{ "OperatesEvent": { "id": 34, "addr": [6, 0, 18], "name": "Probe" } }
+{ "OperatesEvent": { "id": 30, "addr": [3, 0, 16], "name": "InspectBatch" } }
+{ "OperatesEvent": { "id": 30, "addr": [5, 0, 16], "name": "InspectBatch" } }
+{ "OperatesEvent": { "id": 28, "addr": [0, 0, 15], "name": "Inspect" } }
+{ "ChannelsEvent": { "id": 27, "scope_addr": [7, 0], "source": (14, 0), "target": (15, 0) } }
+{ "ChannelsEvent": { "id": 33, "scope_addr": [4, 0], "source": (17, 0), "target": (18, 0) } }
+{ "ChannelsEvent": { "id": 33, "scope_addr": [6, 0], "source": (17, 0), "target": (18, 0) } }
+{ "ChannelsEvent": { "id": 33, "scope_addr": [1, 0], "source": (17, 0), "target": (18, 0) } }
+{ "ChannelsEvent": { "id": 29, "scope_addr": [3, 0], "source": (15, 0), "target": (16, 0) } }
+{ "OperatesEvent": { "id": 32, "addr": [3, 0, 17], "name": "Accumulate" } }
+{ "ChannelsEvent": { "id": 29, "scope_addr": [5, 0], "source": (15, 0), "target": (16, 0) } }
+{ "OperatesEvent": { "id": 32, "addr": [5, 0, 17], "name": "Accumulate" } }
+{ "ChannelsEvent": { "id": 31, "scope_addr": [3, 0], "source": (16, 0), "target": (17, 0) } }
+{ "ChannelsEvent": { "id": 31, "scope_addr": [5, 0], "source": (16, 0), "target": (17, 0) } }
+{ "OperatesEvent": { "id": 34, "addr": [3, 0, 18], "name": "Probe" } }
+{ "OperatesEvent": { "id": 34, "addr": [5, 0, 18], "name": "Probe" } }
+{ "ChannelsEvent": { "id": 33, "scope_addr": [5, 0], "source": (17, 0), "target": (18, 0) } }
+{ "ChannelsEvent": { "id": 33, "scope_addr": [3, 0], "source": (17, 0), "target": (18, 0) } }
+{ "ChannelsEvent": { "id": 27, "scope_addr": [2, 0], "source": (14, 0), "target": (15, 0) } }
+{ "ChannelsEvent": { "id": 27, "scope_addr": [0, 0], "source": (14, 0), "target": (15, 0) } }
+{ "OperatesEvent": { "id": 30, "addr": [2, 0, 16], "name": "InspectBatch" } }
+{ "ChannelsEvent": { "id": 29, "scope_addr": [2, 0], "source": (15, 0), "target": (16, 0) } }
+{ "OperatesEvent": { "id": 32, "addr": [2, 0, 17], "name": "Accumulate" } }
+{ "ChannelsEvent": { "id": 31, "scope_addr": [2, 0], "source": (16, 0), "target": (17, 0) } }
+{ "OperatesEvent": { "id": 34, "addr": [2, 0, 18], "name": "Probe" } }
+{ "ChannelsEvent": { "id": 33, "scope_addr": [2, 0], "source": (17, 0), "target": (18, 0) } }
+{ "OperatesEvent": { "id": 30, "addr": [0, 0, 16], "name": "InspectBatch" } }
+{ "ChannelsEvent": { "id": 29, "scope_addr": [0, 0], "source": (15, 0), "target": (16, 0) } }
+{ "OperatesEvent": { "id": 32, "addr": [0, 0, 17], "name": "Accumulate" } }
+{ "ChannelsEvent": { "id": 31, "scope_addr": [0, 0], "source": (16, 0), "target": (17, 0) } }
+{ "OperatesEvent": { "id": 34, "addr": [0, 0, 18], "name": "Probe" } }
+{ "ChannelsEvent": { "id": 33, "scope_addr": [0, 0], "source": (17, 0), "target": (18, 0) } }
+{ "OperatesEvent": { "id": 30, "addr": [7, 0, 16], "name": "InspectBatch" } }
+{ "ChannelsEvent": { "id": 29, "scope_addr": [7, 0], "source": (15, 0), "target": (16, 0) } }
+{ "OperatesEvent": { "id": 32, "addr": [7, 0, 17], "name": "Accumulate" } }
+{ "ChannelsEvent": { "id": 31, "scope_addr": [7, 0], "source": (16, 0), "target": (17, 0) } }
+{ "OperatesEvent": { "id": 34, "addr": [7, 0, 18], "name": "Probe" } }
+{ "ChannelsEvent": { "id": 33, "scope_addr": [7, 0], "source": (17, 0), "target": (18, 0) } }

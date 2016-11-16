@@ -114,6 +114,7 @@ pub trait ConnectLoop<G: Scope, T: Timestamp, D: Data> {
 impl<'a, G: Scope, T: Timestamp, D: Data> ConnectLoop<G, T, D> for Stream<Child<'a, G, T>, D> {
     fn connect_loop(&self, helper: Handle<G::Timestamp, T, D>) {
         let channel_id = self.scope().new_identifier();
+        println!("Loop Epcoh: {:?}", helper.epoch());
         self.connect_to(Target { index: helper.index, port: 0 }, helper.target, channel_id);
     }
 }
@@ -122,6 +123,13 @@ impl<'a, G: Scope, T: Timestamp, D: Data> ConnectLoop<G, T, D> for Stream<Child<
 pub struct Handle<TOuter: Timestamp, TInner: Timestamp, D: Data> {
     index:  usize,
     target: Counter<Product<TOuter, TInner>, D, Observer<TOuter, TInner, D>>
+}
+
+impl<TOuter: Timestamp, TInner: Timestamp, D: Data> Handle<TOuter, TInner, Data>{
+    /// Reports the current epoch.
+    pub fn epoch(&self) -> &TInner {
+        &self.target;
+    }
 }
 
 // the scope that the progress tracker interacts with

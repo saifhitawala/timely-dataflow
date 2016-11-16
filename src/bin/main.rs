@@ -32,7 +32,21 @@ fn main() {
             let index = scope.index();
             let (input, stream) = scope.new_input();
             let probe = stream.exchange(|x| *x as u64)
-                .inspect(move |x| println!("worker {}: \thello {}", index, x))
+                .inspect(move |x| println!("Initially:\t worker {}: \t\thello {}", index, x))
+                .map(|x| x+1)
+                .inspect(move |x| println!("Map:\t\t worker {}: \t\thello {}", index, x))
+                .filter(|x| *x % 1 == 0)
+                .inspect(move |x| println!("Filter:\t\t worker {}: \t\thello {}", index, x))
+                .map_in_place(|x| *x += 1)
+                .inspect(move |x| println!("Map_in_place:\t worker {}: \t\thello {}", index, x))
+                .accumulate(0, |sum, data| { for &x in data.iter() { *sum += x; } })
+                .inspect(move |x| println!("Accumulate:\t worker {}: \t\thello {}", index, x))
+                .broadcast()
+                .inspect(move |x| println!("Broadcast:\t worker {}: \t\thello {}", index, x))
+                .map(|x| x+1)
+                .inspect(move |x| println!("Map 2:\t\t worker {}: \t\thello {}", index, x))
+                .inspect_batch(move |t,x| println!("Inspect_batch:\t Time: {:?}\t Records: {:?}", t, x.len()))
+                .count()
                 .probe().0;
             (input, probe)
         });
@@ -67,7 +81,7 @@ fn main() {
         });*/
 
         // introduce data and watch!
-        for round in 0..3 {
+        for round in 0..10 {
             input.send(round);
             //println!("Epoch: {}", input.epoch());
             input.advance_to(round + 1);
