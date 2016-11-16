@@ -63,7 +63,7 @@ fn main() {
                 result.leave()
             });
 
-            (input, result.probe().0)
+            (input, result.probe().0)...
         });*/
 
         // introduce data and watch!

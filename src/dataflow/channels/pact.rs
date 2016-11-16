@@ -86,8 +86,10 @@ impl<T, D> Push<(T, Content<D>)> for Pusher<T, D> {
             });
 
             ::vizlogging::log_message_info(::vizlogging::MessagesEvent{
+                is_send: true,
                 channel: self.channel,
-                worker_id: self.source,
+                source_worker_id: self.source,
+                dest_worker_id: self.target,
                 number_of_records: data.len(),
             });
 
@@ -139,6 +141,14 @@ impl<T, D> Pull<(T, Content<D>)> for Puller<T, D> {
                 target: self.index,
                 seq_no: message.seq,
                 length: message.data.len(),
+            });
+
+            ::vizlogging::log_message_info(::vizlogging::MessagesEvent{
+                is_send: false,
+                channel: self.channel,
+                source_worker_id: message.from,
+                dest_worker_id: self.index,
+                number_of_records: message.data.len(),
             });
 
         }

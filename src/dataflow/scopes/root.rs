@@ -34,6 +34,11 @@ impl<A: Allocate> Root<A> {
             ::logging::initialize(&mut result);
         }
 
+        // VISUALIZATIN LOGGING
+        if cfg!(feature = "visualization") {
+            ::vizlogging::set_index(&mut result);
+        }
+
         result
     }
     /// Performs one step of the computation.
