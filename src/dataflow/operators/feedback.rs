@@ -114,7 +114,7 @@ pub trait ConnectLoop<G: Scope, T: Timestamp, D: Data> {
 impl<'a, G: Scope, T: Timestamp, D: Data> ConnectLoop<G, T, D> for Stream<Child<'a, G, T>, D> {
     fn connect_loop(&self, helper: Handle<G::Timestamp, T, D>) {
         let channel_id = self.scope().new_identifier();
-        //println!("Loop Epcoh: {:?}", helper.epoch());
+        //println!("Loop Epoch: {:?}", helper.target);
         self.connect_to(Target { index: helper.index, port: 0 }, helper.target, channel_id);
     }
 }
@@ -125,12 +125,14 @@ pub struct Handle<TOuter: Timestamp, TInner: Timestamp, D: Data> {
     target: Counter<Product<TOuter, TInner>, D, Observer<TOuter, TInner, D>>
 }
 
-/*impl<TOuter: Timestamp, TInner: Timestamp, D: Data> Handle<TOuter, TInner, Data>{
+/*
+impl<TOuter: Timestamp, TInner: Timestamp, D: Data> Handle<TOuter, TInner, D>{
     /// Reports the current epoch.
-    pub fn epoch(&self) -> &TInner {
+    pub fn epoch(&self) -> &Counter<Product<TOuter, TInner>, D, Observer<TOuter, TInner, D>> {
         &self.target;
     }
-}*/
+}
+*/
 
 // the scope that the progress tracker interacts with
 struct Operator<T:Timestamp> {
@@ -138,7 +140,6 @@ struct Operator<T:Timestamp> {
     produced_messages:  Rc<RefCell<CountMap<T>>>,
     summary:            T::Summary,
 }
-
 
 impl<T:Timestamp> Operate<T> for Operator<T> {
     fn name(&self) -> String { "Feedback".to_owned() }

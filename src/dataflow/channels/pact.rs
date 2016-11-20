@@ -92,7 +92,7 @@ impl<T, D> Push<(T, Content<D>)> for Pusher<T, D> {
                 dest_worker_id: self.target,
                 number_of_records: data.len(),
             });
-
+            
             let mut message = Some(Message::new(time, data, self.source, self.counter));
             self.counter += 1;
             self.pusher.push(&mut message);

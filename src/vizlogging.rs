@@ -4,37 +4,32 @@ extern crate time;
 
 use std::cell::RefCell;
 use std::fs;
-use std::fs::File;
-use std::fs::OpenOptions;
-use std::io::{BufWriter};
+use std::fs::{File, OpenOptions};
+use std::io::BufWriter;
+use std::io::prelude::*;
 
 use ::Data;
 
-use std::fmt;
-use std::fmt::Debug;
-
-use timely_communication::Allocate;
-use ::progress::timestamp::RootTimestamp;
-use ::progress::nested::product::Product;
-
 use dataflow::scopes::root::Root;
-use dataflow::Scope;
-use dataflow::operators::capture::{EventWriter, Event, EventPusher};
-
-use progress::count_map::CountMap;
-use progress::nested::subgraph::{Source, Target};
-use progress::{Timestamp, Operate, Antichain};
-
 use dataflow::operators::input::Handle;
 
-use std::io::prelude::*;
+use progress::timestamp::Timestamp;
+
+use timely_communication::Allocate;
 
 use abomonation::Abomonation;
 
-use ::logging;
+/// Returns the value of an high resolution performance counter, in nanoseconds, rebased to be
+/// roughly comparable to an unix timestamp.
+/// Useful for comparing and merging logs from different machines (precision is limited by the
+/// precision of the wall clock base; clock skew effects should be taken into consideration).
+#[inline(always)]
+pub fn get_precise_time_ns() -> u64 {
+    time::precise_time_ns() as u64
+}
 
 thread_local!{
-    /// fuck the system
+    /// Stores the worker index throughout the logging of all computational events
     pub static worker_index: RefCell<usize> = RefCell::new(1);
 }
 
@@ -91,12 +86,10 @@ pub fn path_exists(path: &str) -> bool {
 /// logs message events
 pub fn log_message_info(message_event: MessagesEvent) {
       
-    unsafe{
-
-        let path_String : String = format!("logs/message.txt");
-        let path : &str = &path_String[..];
+        let path_string : String = format!("logs/message.txt");
+        let path : &str = &path_string[..];
         if path_exists(path) {
-            let mut file =
+            let file =
             OpenOptions::new()
             .write(true)
             .append(true)
@@ -104,41 +97,41 @@ pub fn log_message_info(message_event: MessagesEvent) {
             .unwrap();
 
             let mut f = BufWriter::new(file);
+            let time = get_precise_time_ns();
             f.write_fmt(format_args!("{{ \"MessagesEvent\": {{ \
                          \"is_send\": {:?}, \
                          \"channel\": {:?}, \
                          \"source_worker_id\": {:?}, \
                          \"dest_worker_id\": {:?}, \
-                         \"number_of_records\": {:?}  \
+                         \"number_of_records\": {:?}, \
+                         \"timestamp\": {:?} \
                    }} }}\n",
-            message_event.is_send, message_event.channel, message_event.source_worker_id, message_event.dest_worker_id, message_event.number_of_records)).expect("Unable to write data");
+            message_event.is_send, message_event.channel, message_event.source_worker_id, message_event.dest_worker_id, message_event.number_of_records, time)).expect("Unable to write data");
         }
         else{
             let f = File::create(path).expect("Unable to create file");
             let mut f = BufWriter::new(f);
+            let time = get_precise_time_ns();
             f.write_fmt(format_args!("{{ \"MessagesEvent\": {{ \
                          \"is_send\": {:?}, \
                          \"channel\": {:?}, \
                          \"source_worker_id\": {:?}, \
                          \"dest_worker_id\": {:?}, \
-                         \"number_of_records\": {:?}  \
+                         \"number_of_records\": {:?}, \
+                         \"timestamp\": {:?} \
                    }} }}\n",
-            message_event.is_send, message_event.channel, message_event.source_worker_id, message_event.dest_worker_id, message_event.number_of_records)).expect("Unable to write data");
-        
+            message_event.is_send, message_event.channel, message_event.source_worker_id, message_event.dest_worker_id, message_event.number_of_records, time)).expect("Unable to write data");
         }
 
-    }
 }
 
 /// logs operator events
 pub fn log_operator_info(operate_event: OperatesEvent) {
 
-    unsafe{
-
-        let path_String : String = format!("logs/operate.txt");
-        let path : &str = &path_String[..];
+        let path_string : String = format!("logs/operate.txt");
+        let path : &str = &path_string[..];
         if path_exists(path) {
-            let mut file =
+            let file =
             OpenOptions::new()
             .write(true)
             .append(true)
@@ -146,46 +139,47 @@ pub fn log_operator_info(operate_event: OperatesEvent) {
             .unwrap();
 
             let mut f = BufWriter::new(file);
+            let time = get_precise_time_ns();
             worker_index.with(|wid| {
                 if *wid.borrow() == 0 
                 {
                     f.write_fmt(format_args!("{{ \"OperatesEvent\": {{ \
                                  \"id\": {:?}, \
                                  \"addr\": {:?}, \
-                                 \"name\": {:?} \
+                                 \"name\": {:?}, \
+                                 \"timestamp\": {:?} \
                            }} }}\n",
-                    operate_event.id, operate_event.addr, operate_event.name)).expect("Unable to write data");
+                    operate_event.id, operate_event.addr, operate_event.name, time)).expect("Unable to write data");
                 }
             });  
         }
         else{
             let f = File::create(path).expect("Unable to create file");
             let mut f = BufWriter::new(f);
+            let time = get_precise_time_ns();
             worker_index.with(|wid| {
                 if *wid.borrow() == 0 
                 {
                     f.write_fmt(format_args!("{{ \"OperatesEvent\": {{ \
                                  \"id\": {:?}, \
                                  \"addr\": {:?}, \
-                                 \"name\": {:?} \
+                                 \"name\": {:?}, \
+                                 \"timestamp\": {:?} \
                            }} }}\n",
-                    operate_event.id, operate_event.addr, operate_event.name)).expect("Unable to write data");
+                    operate_event.id, operate_event.addr, operate_event.name, time)).expect("Unable to write data");
                 }
             }); 
         }
 
-    }
 }
 
 /// logs channel events
 pub fn log_channel_info(channel_event: ChannelsEvent) {
 
-    unsafe{
-
-        let path_String : String = format!("logs/operate.txt");
-        let path : &str = &path_String[..];
+        let path_string : String = format!("logs/operate.txt");
+        let path : &str = &path_string[..];
         if path_exists(path) {
-            let mut file =
+            let file =
             OpenOptions::new()
             .write(true)
             .append(true)
@@ -193,6 +187,7 @@ pub fn log_channel_info(channel_event: ChannelsEvent) {
             .unwrap();
 
             let mut f = BufWriter::new(file);
+            let time = get_precise_time_ns();
             worker_index.with(|wid| {
                 if *wid.borrow() == 0 
                 {
@@ -200,9 +195,10 @@ pub fn log_channel_info(channel_event: ChannelsEvent) {
                                  \"id\": {:?}, \
                                  \"scope_addr\": {:?}, \
                                  \"source\": {:?}, \
-                                 \"target\": {:?} \
+                                 \"target\": {:?}, \
+                                 \"timestamp\": {:?} \
                            }} }}\n",
-                    channel_event.id, channel_event.scope_addr, vec![channel_event.source.0, channel_event.source.1], vec![channel_event.target.0, channel_event.target.1])).expect("Unable to write data");   
+                    channel_event.id, channel_event.scope_addr, vec![channel_event.source.0, channel_event.source.1], vec![channel_event.target.0, channel_event.target.1], time)).expect("Unable to write data");   
                 }
             }); 
             
@@ -210,6 +206,7 @@ pub fn log_channel_info(channel_event: ChannelsEvent) {
         else{
             let f = File::create(path).expect("Unable to create file");
             let mut f = BufWriter::new(f);
+            let time = get_precise_time_ns();
             worker_index.with(|wid| {
                 if *wid.borrow() == 0 
                 {
@@ -217,23 +214,23 @@ pub fn log_channel_info(channel_event: ChannelsEvent) {
                                  \"id\": {:?}, \
                                  \"scope_addr\": {:?}, \
                                  \"source\": {:?}, \
-                                 \"target\": {:?} \
+                                 \"target\": {:?}, \
+                                 \"timestamp\": {:?} \
                            }} }}\n",
-                    channel_event.id, channel_event.scope_addr, vec![channel_event.source.0, channel_event.source.1], vec![channel_event.target.0, channel_event.target.1])).expect("Unable to write data");   
+                    channel_event.id, channel_event.scope_addr, vec![channel_event.source.0, channel_event.source.1], vec![channel_event.target.0, channel_event.target.1], time)).expect("Unable to write data");   
                 }
             });
         }    
-    }
+    
 }
 
-/// get the epoch
+/// gets the epoch
 pub fn get_epoch<T: Timestamp+Ord, D: Data>(handle: &mut Handle<T, D>) {
 
-    unsafe{
-        let path_String : String = format!("logs/message.txt");
-        let path : &str = &path_String[..];
+        let path_string : String = format!("logs/message.txt");
+        let path : &str = &path_string[..];
         if path_exists(path) {
-            let mut file =
+            let file =
             OpenOptions::new()
             .write(true)
             .append(true)
@@ -241,30 +238,33 @@ pub fn get_epoch<T: Timestamp+Ord, D: Data>(handle: &mut Handle<T, D>) {
             .unwrap();
 
             let mut f = BufWriter::new(file);
+            let time = get_precise_time_ns();
             worker_index.with(|wid| {
                 f.write_fmt(format_args!("{{ \"Epoch\":  {:?}, \
-                    \"Worker_Id\": {:?} \
+                    \"Worker_Id\": {:?}, \
+                    \"Timestamp\": {:?} \
                      }}\n",
-                handle.epoch(), *wid.borrow())).expect("Unable to write data");
+                handle.epoch(), *wid.borrow(), time)).expect("Unable to write data");
             });
         }
         else{
             let f = File::create(path).expect("Unable to create file");
             let mut f = BufWriter::new(f);
+            let time = get_precise_time_ns();
             worker_index.with(|wid| {
                 f.write_fmt(format_args!("{{ \"Epoch\":  {:?}, \
-                    \"Worker_Id\": {:?} \
+                    \"Worker_Id\": {:?}, \
+                    \"Timestamp\": {:?} \
                      }}\n",
-                handle.epoch(), *wid.borrow())).expect("Unable to write data");
+                handle.epoch(), *wid.borrow(), time)).expect("Unable to write data");
             });
         }
-    }
+    
 }
 
-/// get the index of a worker
+/// sets the index of a worker
 pub fn set_index<A: Allocate>(root: &mut Root<A>){
     worker_index.with(|f| {
-        //assert_eq!(*f.borrow(), 1);
         *f.borrow_mut() = root.index();
     });
 }

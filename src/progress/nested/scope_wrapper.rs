@@ -43,7 +43,7 @@ impl<T: Timestamp> ChildWrapper<T> {
 
         ::logging::log(&::logging::OPERATES, ::logging::OperatesEvent { addr: path.clone(), name: scope.name().to_owned() });
 
-        ::vizlogging::log_operator_info(::vizlogging::OperatesEvent { addr: path.clone(), name: scope.name().to_owned() }));
+        ::vizlogging::log_operator_info(::vizlogging::OperatesEvent { addr: path.clone(), name: scope.name().to_owned() });
 
         let local = scope.local();
         let inputs = scope.inputs();
