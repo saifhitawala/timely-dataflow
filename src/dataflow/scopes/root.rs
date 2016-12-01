@@ -34,6 +34,10 @@ impl<A: Allocate> Root<A> {
             ::logging::initialize(&mut result);
         }
 
+        if cfg!(feature = "vizlogging") {
+           ::vizlogging::set_worker_index(&mut result); 
+        }
+
         result
     }
     /// Performs one step of the computation.

@@ -74,6 +74,9 @@ pub mod execute;
 // #[cfg(feature = "logging")]
 pub mod logging;
 
+// #[cfg(feature = "visualization")]
+pub mod vizlogging;
+
 /// A composite trait for types usable in timely dataflow.
 pub trait Data: timely_communication::Data + abomonation::Abomonation { }
 impl<T: timely_communication::Data+abomonation::Abomonation> Data for T { }

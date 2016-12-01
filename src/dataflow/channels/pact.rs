@@ -76,14 +76,17 @@ impl<T, D> Push<(T, Content<D>)> for Pusher<T, D> {
     fn push(&mut self, pair: &mut Option<(T, Content<D>)>) {
         if let Some((time, data)) = pair.take() {
 
-            ::logging::log(&::logging::MESSAGES, ::logging::MessagesEvent {
+            let msg_event = ::logging::MessagesEvent {
                 is_send: true,
                 channel: self.channel,
                 source: self.source,
                 target: self.target,
                 seq_no: self.counter,
                 length: data.len(),
-            });
+            };
+
+            ::logging::log(&::logging::MESSAGES, msg_event.clone());
+            ::vizlogging::log_messages_event(msg_event);
 
             let mut message = Some(Message::new(time, data, self.source, self.counter));
             self.counter += 1;
@@ -126,14 +129,17 @@ impl<T, D> Pull<(T, Content<D>)> for Puller<T, D> {
 
         if let Some(ref message) = previous.as_ref() {
 
-            ::logging::log(&::logging::MESSAGES, ::logging::MessagesEvent {
+            let msg_event = ::logging::MessagesEvent {
                 is_send: false,
                 channel: self.channel,
                 source: message.from,
                 target: self.index,
                 seq_no: message.seq,
-                length: message.data.len(),
-            });
+                length: message.data.len()
+            };
+
+            ::logging::log(&::logging::MESSAGES, msg_event.clone());
+            ::vizlogging::log_messages_event(msg_event);
         }
 
         self.current = previous.map(|message| (message.time, message.data));

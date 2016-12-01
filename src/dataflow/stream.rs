@@ -34,12 +34,15 @@ impl<S: Scope, D:Data> Stream<S, D> {
     /// records should actually be sent. The identifier is unique to the edge and is used only for logging purposes.
     pub fn connect_to<P: Push<(S::Timestamp, Content<D>)>+'static>(&self, target: Target, pusher: P, identifier: usize) {
 
-        ::logging::log(&::logging::CHANNELS, ::logging::ChannelsEvent {
+        let ch_event = ::logging::ChannelsEvent {
             id: identifier,
             scope_addr: self.scope.addr(),
             source: (self.name.index, self.name.port),
-            target: (target.index, target.port),
-        });
+            target: (target.index, target.port), 
+        };
+
+        ::logging::log(&::logging::CHANNELS, ch_event.clone());
+        ::vizlogging::log_channels_event(ch_event);
 
         self.scope.add_edge(self.name, target);
         self.ports.add_pusher(pusher);

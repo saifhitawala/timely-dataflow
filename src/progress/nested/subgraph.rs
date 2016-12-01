@@ -759,6 +759,7 @@ impl<T: Timestamp> PerOperatorState<T> {
         path.push(index);
 
         ::logging::log(&::logging::OPERATES, ::logging::OperatesEvent { id: identifier, addr: path.clone(), name: scope.name().to_owned() });
+        ::vizlogging::log_operates_event(::logging::OperatesEvent { id: identifier, addr: path.clone(), name: scope.name().to_owned() });
 
         let local = scope.local();
         let inputs = scope.inputs();
