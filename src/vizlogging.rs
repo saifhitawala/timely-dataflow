@@ -87,7 +87,7 @@ pub fn log_event(path: &str, event: Events) {
                     {{\
                        \"is_send\": {:?}, \"channel\": {:?}, \"source\": {:?}, \
                        \"target\": {:?}, \"length\": {:?} \
-                    }}\
+                    }} \
                    }}\n",
                    e.is_send, e.channel, e.source,
                    e.target, e.length
@@ -98,7 +98,7 @@ pub fn log_event(path: &str, event: Events) {
                   "{{ \"OperatesEvent\": \
                     {{\
                       \"id\": {:?}, \"addr\": {:?}, \"name\": {:?} \
-                    }}\
+                    }} \
                    }}\n",
                    e.id, e.addr, e.name
                   )).expect("Unable to write to log file"),
@@ -108,8 +108,8 @@ pub fn log_event(path: &str, event: Events) {
                   "{{ \"ChannelsEvent\": \
                     {{\
                       \"id\": {:?}, \"scope_addr\": {:?}, \
-                      \"source\": {:?}, \"target\": {:?}, \
-                    }}\
+                      \"source\": {:?}, \"target\": {:?} \
+                    }} \
                    }}\n",
                    e.id, e.scope_addr,
                    vec![e.source.0, e.source.1],
