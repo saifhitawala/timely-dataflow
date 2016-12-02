@@ -7,10 +7,11 @@
 use timely_communication::{Serialize, Push};
 use std::ops::{Deref, DerefMut};
 use abomonation::{Abomonation, encode, decode};
+use std::fmt::Debug;
 
 /// A serializable representation of timestamped data.
 #[derive(Clone)]
-pub struct Message<T, D> {
+pub struct Message<T:Debug, D> {
     /// The timestamp associated with the message.
     pub time: T,
     /// The data in the message.
@@ -21,7 +22,7 @@ pub struct Message<T, D> {
     pub seq: usize,
 }
 
-impl<T, D> Message<T, D> {
+impl<T: Debug, D> Message<T, D> {
     /// Allocates a new message from a time, content, source worker id, and sequence number.
     #[inline]
     pub fn new(time: T, data: Content<D>, from: usize, seq: usize) -> Message<T, D> {
@@ -35,7 +36,7 @@ impl<T, D> Message<T, D> {
 }
 
 // Implementation required to get different behavior out of communication fabric.
-impl<T: Abomonation+Clone, D: Abomonation> Serialize for Message<T, D> {
+impl<T: Abomonation+Clone+Debug, D: Abomonation> Serialize for Message<T, D> {
     #[inline]
     fn into_bytes(&mut self, bytes: &mut Vec<u8>) {
         unsafe { encode(&self.time, bytes); }

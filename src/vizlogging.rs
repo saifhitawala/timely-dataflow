@@ -31,7 +31,7 @@ pub fn set_worker_index<A: Allocate>(root: &mut Root<A>){
 /// enum used to match different events
 pub enum Events {
     /// from ::logging both send and recv
-    Msg(MessagesEvent),
+    Msg(MessagesEvent, String),
     /// from ::logging (vertex)
     Op(OperatesEvent),
     /// from ::logging (edge)
@@ -39,11 +39,11 @@ pub enum Events {
 }
 
 /// logs messages events for both sending and receiving ends.
-pub fn log_messages_event(msg_event: MessagesEvent) {
+pub fn log_messages_event(msg_event: MessagesEvent, time: String) {
     if cfg!(feature = "vizlogging") {   
         worker.with(|index| {
             let path = &format!("logs/messages-{}.log", *index.borrow());
-            log_event(path, Events::Msg(msg_event));
+            log_event(path, Events::Msg(msg_event, time));
         });
     }
 }
@@ -70,7 +70,7 @@ pub fn log_channels_event(ch_event: ChannelsEvent) {
 
 /// logs events and called by specialized log functions
 pub fn log_event(path: &str, event: Events) {
-    
+
     let file = if fs::metadata(path).is_ok() {
         OpenOptions::new().write(true).append(true)
                                         .open(path).unwrap()
@@ -81,16 +81,16 @@ pub fn log_event(path: &str, event: Events) {
     let mut buf_writer = BufWriter::new(file);
 
     match event {
-        Events::Msg(e) 
+        Events::Msg(e, t)
             => buf_writer.write_fmt(format_args!(
                   "{{ \"MessagesEvent\": \
                     {{\
                        \"is_send\": {:?}, \"channel\": {:?}, \"source\": {:?}, \
-                       \"target\": {:?}, \"length\": {:?} \
+                       \"target\": {:?}, \"length\": {:?}, \"time\": {:?} \
                     }} \
                    }}\n",
                    e.is_send, e.channel, e.source,
-                   e.target, e.length
+                   e.target, e.length, t
                   )).expect("Unable to write to log file"),
 
         Events::Op(e)

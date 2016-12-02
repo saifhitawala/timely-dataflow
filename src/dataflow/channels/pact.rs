@@ -1,6 +1,7 @@
 //! Parallelization contracts, describing requirements for data movement along dataflow edges.
 
 use std::marker::PhantomData;
+use std::fmt::Debug;
 
 use timely_communication::{Allocate, Push, Pull, Data};
 use timely_communication::allocator::Thread;
@@ -18,7 +19,7 @@ pub trait ParallelizationContract<T: 'static, D: 'static> {
 
 /// A direct connection
 pub struct Pipeline;
-impl<T: 'static, D: 'static> ParallelizationContract<T, D> for Pipeline {
+impl<T: Debug + 'static, D: 'static> ParallelizationContract<T, D> for Pipeline {
     fn connect<A: Allocate>(self, allocator: &mut A, identifier: usize) -> (Box<Push<(T, Content<D>)>>, Box<Pull<(T, Content<D>)>>) {
         // ignore &mut A and use thread allocator
         let (mut pushers, puller) = Thread::new::<Message<T, D>>();
@@ -43,7 +44,7 @@ impl<D, F: Fn(&D)->u64> Exchange<D, F> {
 // Exchange uses a Box<Pushable> because it cannot know what type of pushable will return from the allocator.
 // The PactObserver will do some buffering for Exchange, cutting down on the virtual calls, but we still
 // would like to get the vectors it sends back, so that they can be re-used if possible.
-impl<T: Eq+Data+Abomonation, D: Data+Abomonation, F: Fn(&D)->u64+'static> ParallelizationContract<T, D> for Exchange<D, F> {
+impl<T: Eq+Data+Abomonation+Debug, D: Data+Abomonation, F: Fn(&D)->u64+'static> ParallelizationContract<T, D> for Exchange<D, F> {
     fn connect<A: Allocate>(self, allocator: &mut A, identifier: usize) -> (Box<Push<(T, Content<D>)>>, Box<Pull<(T, Content<D>)>>) {
         let (senders, receiver) = allocator.allocate::<Message<T, D>>();
         let senders = senders.into_iter().enumerate().map(|(i,x)| Pusher::new(x, allocator.index(), i, identifier)).collect::<Vec<_>>();
@@ -52,14 +53,14 @@ impl<T: Eq+Data+Abomonation, D: Data+Abomonation, F: Fn(&D)->u64+'static> Parall
 }
 
 /// Wraps a `Message<T,D>` pusher to provide a `Push<(T, Content<D>)>`.
-pub struct Pusher<T, D> {
+pub struct Pusher<T: Debug, D> {
     pusher: Box<Push<Message<T, D>>>,
     channel: usize,
     counter: usize,
     source: usize,
     target: usize,
 }
-impl<T, D> Pusher<T, D> {
+impl<T: Debug, D> Pusher<T, D> {
     /// Allocates a new pusher.
     pub fn new(pusher: Box<Push<Message<T, D>>>, source: usize, target: usize, channel: usize) -> Pusher<T, D> {
         Pusher {
@@ -72,7 +73,7 @@ impl<T, D> Pusher<T, D> {
     }
 }
 
-impl<T, D> Push<(T, Content<D>)> for Pusher<T, D> {
+impl<T: Debug, D> Push<(T, Content<D>)> for Pusher<T, D> {
     fn push(&mut self, pair: &mut Option<(T, Content<D>)>) {
         if let Some((time, data)) = pair.take() {
 
@@ -86,8 +87,8 @@ impl<T, D> Push<(T, Content<D>)> for Pusher<T, D> {
             };
 
             ::logging::log(&::logging::MESSAGES, msg_event.clone());
-            ::vizlogging::log_messages_event(msg_event);
-
+            ::vizlogging::log_messages_event(msg_event, format!("{:?}", time));
+            
             let mut message = Some(Message::new(time, data, self.source, self.counter));
             self.counter += 1;
             self.pusher.push(&mut message);
@@ -100,14 +101,14 @@ impl<T, D> Push<(T, Content<D>)> for Pusher<T, D> {
 }
 
 /// Wraps a `Message<T,D>` puller to provide a `Pull<(T, Content<D>)>`.
-pub struct Puller<T, D> {
+pub struct Puller<T:Debug, D> {
     puller: Box<Pull<Message<T, D>>>,
     current: Option<(T, Content<D>)>,
     channel: usize,
     counter: usize,
     index: usize,
 }
-impl<T, D> Puller<T, D> {
+impl<T: Debug, D> Puller<T, D> {
     /// Allocates a new `Puller`.
     pub fn new(puller: Box<Pull<Message<T, D>>>, index: usize, channel: usize) -> Puller<T, D> {
         Puller {
@@ -120,7 +121,7 @@ impl<T, D> Puller<T, D> {
     }
 }
 
-impl<T, D> Pull<(T, Content<D>)> for Puller<T, D> {
+impl<T: Debug, D> Pull<(T, Content<D>)> for Puller<T, D> {
     fn pull(&mut self) -> &mut Option<(T, Content<D>)> {
         let mut previous = self.current.take().map(|(time, data)| Message::new(time, data, self.index, self.counter));
         self.counter += 1;
@@ -139,7 +140,7 @@ impl<T, D> Pull<(T, Content<D>)> for Puller<T, D> {
             };
 
             ::logging::log(&::logging::MESSAGES, msg_event.clone());
-            ::vizlogging::log_messages_event(msg_event);
+            ::vizlogging::log_messages_event(msg_event, format!("{:?}", message.time));
         }
 
         self.current = previous.map(|message| (message.time, message.data));
