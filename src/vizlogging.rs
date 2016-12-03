@@ -42,7 +42,7 @@ pub enum Events {
 pub fn log_messages_event(msg_event: MessagesEvent, time: String) {
     if cfg!(feature = "vizlogging") {   
         worker.with(|index| {
-            let path = &format!("logs/messages-{}.log", *index.borrow());
+            let path = &format!("vizlogs/messages-{}.log", *index.borrow());
             log_event(path, Events::Msg(msg_event, time));
         });
     }
@@ -52,7 +52,7 @@ pub fn log_messages_event(msg_event: MessagesEvent, time: String) {
 pub fn log_operates_event(op_event: OperatesEvent) {
     if cfg!(feature = "vizlogging") {   
         worker.with(|index| {
-            let path = &format!("logs/topology-{}.log", *index.borrow());
+            let path = &format!("vizlogs/topology-{}.log", *index.borrow());
             log_event(path, Events::Op(op_event));
         });
     }
@@ -62,7 +62,7 @@ pub fn log_operates_event(op_event: OperatesEvent) {
 pub fn log_channels_event(ch_event: ChannelsEvent) {
     if cfg!(feature = "vizlogging") {   
         worker.with(|index| {
-            let path = &format!("logs/topology-{}.log", *index.borrow());
+            let path = &format!("vizlogs/topology-{}.log", *index.borrow());
             log_event(path, Events::Ch(ch_event));
         });
     }
